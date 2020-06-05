@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../TypeScript/parfait-review"
+    },
+    {
+      "path": "../TypeScript/react-ts-counter"
+    }
+  ]
+}
