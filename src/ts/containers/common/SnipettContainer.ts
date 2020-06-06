@@ -1,9 +1,7 @@
 import { Action } from "typescript-fsa";
 import { Dispatch } from "redux";
-import { connect } from "react-redux";
-import { AppState } from "../store";
-import { snipettActions } from "../actions/snipettActions";
-import { inputSnipett } from "../components/inputSnipett";
+import { AppState } from "../../store";
+import { snipettActions } from "../../actions/snipettActions";
 
 export interface SnipettActions {
   inputSnipettName: (v: string) => Action<string>;
@@ -12,7 +10,7 @@ export interface SnipettActions {
   inputSnipettDescription: (v: string) => Action<string>;
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action<string>>) {
+export const mapDispatchToProps = (dispatch: Dispatch<Action<string>>) => {
   return {
     inputSnipettName: (v: string) =>
       dispatch(snipettActions.inputSnipettName(v)),
@@ -23,10 +21,8 @@ function mapDispatchToProps(dispatch: Dispatch<Action<string>>) {
     inputSnipettDescription: (v: string) =>
       dispatch(snipettActions.inputSnipettDescription(v)),
   };
-}
+};
 
-function mapStateToProps(appState: AppState) {
+export const mapStateToProps = (appState: AppState) => {
   return { ...appState.snipett };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(inputSnipett);
+};
