@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const BellOnBundlerErrorPlugin = require("bell-on-bundler-error-plugin");
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 module.exports = {
   entry: "./src/ts/index.tsx",
@@ -59,6 +60,7 @@ module.exports = {
     }),
 
     new BellOnBundlerErrorPlugin(),
+    new HardSourceWebpackPlugin(),
   ],
 
   devServer: {
