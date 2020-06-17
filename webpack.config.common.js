@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: "./src/ts/index.tsx",
@@ -63,5 +64,10 @@ module.exports = {
     host: "0.0.0.0",
     useLocalIp: true,
     open: true,
-  }
+  },
+
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
 };
