@@ -1,53 +1,62 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
+const WebpackDevServer = require("webpack-dev-server");
 
 module.exports = {
-  mode: "development",
-
-  entry: path.resolve(__dirname, "src/ts/index.tsx"),
+  
+  entry: "./src/ts/index.tsx",
 
   output: {
-    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    path: path.resolve(__dirname, "./dist/js")
   },
 
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
-        use: "ts-loader",
-        exclude: /(node_modules | test)$/,
+        test: /.(js|jsx)$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react"
+            ]
+          }
+        }
       },
       {
-        test: /\.(css|sass|scss)$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /.(ts|tsx)$/,
+        use: {
+          loader: "ts-loader"
+        }
       },
       {
-        test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|oft)$/,
-        loader: "file-loader",
-        options: {
-          limit: 8192,
-          name: path.resolve(__dirname, "images/[name].[ext]"),
-        },
-      },
-    ],
+        test: /\.html$/,
+        loader: "html-loader"
+      }
+    ]
   },
 
   resolve: {
-    extensions: [".tsx", "jsx", ".ts", ".js", ".json"],
+    extensions: [
+      ".ts", ".tsx", ".js", ".jsx"
+    ]
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      //filename: "index.html",
+      filename: path.resolve(__dirname, "dist/index.html"),
       template: path.resolve(__dirname, "src/html/index.html"),
-    }),
-    new HardSourceWebpackPlugin(),
+      inject: true
+    })
   ],
+
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
-    compress: true,
-    port: 9000,
-  },
+    publicPath: "/js/",
+    host: "0.0.0.0",
+    useLocalIp: true,
+    open: true,
+  }
 };

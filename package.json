@@ -1,77 +1,46 @@
 {
   "name": "vscode-snipett-translator",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/js/index.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "webpack --mode development --config webpack.config.common.js",
+    "start:dev": "webpack-dev-server --open  --config webpack.config.common.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koralle/vscode-snipett-translator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koralle/vscode-snipett-translator/issues"
+  },
+  "homepage": "https://github.com/koralle/vscode-snipett-translator#readme",
   "dependencies": {
-    "@material-ui/core": "^4.10.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.43",
-    "@types/react": "^16.9.35",
-    "@types/react-dom": "^16.9.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "typescript": "^3.7.5",
-    "typescript-fsa": "^3.0.0",
-    "typescript-fsa-reducers": "^1.2.1"
-  },
-  "scripts": {
-    "build:dev": "webpack --mode development --config webpack.config.common.js",
-    "lint": "eslint src/ts/index.tsx",
-    "lint:fix": "eslint --fix src/ts/index.tsx",
-    "start": "webpack-dev-server --hot --inline"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "webpack-html-plugin": "^0.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
-    "@babel/preset-typescript": "^7.10.1",
-    "@types/hard-source-webpack-plugin": "^1.0.1",
-    "@types/html-webpack-plugin": "^3.2.3",
-    "@types/material-ui": "^0.21.7",
-    "@types/react-redux": "^7.1.9",
-    "@types/styled-components": "^5.1.0",
-    "@types/webpack": "^4.41.17",
-    "@types/webpack-dev-server": "^3.11.0",
-    "@typescript-eslint/eslint-plugin": "^3.1.0",
-    "@typescript-eslint/parser": "^3.1.0",
+    "@types/react": "^16.9.38",
+    "@types/react-dom": "^16.9.8",
     "babel-loader": "^8.1.0",
-    "babel-minify-webpack-plugin": "^0.3.1",
-    "babel-plugin-styled-components": "^1.10.7",
-    "cross-env": "^7.0.2",
-    "css-loader": "^3.5.3",
-    "eslint": "^7.1.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "file-loader": "^6.0.0",
-    "hard-source-webpack-plugin": "^0.13.1",
+    "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
-    "node-sass": "^4.14.1",
-    "prettier": "^2.0.5",
-    "sass-loader": "^8.0.2",
-    "styled-components": "^5.1.1",
     "ts-loader": "^7.0.5",
-    "url-loader": "^4.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5",
+    "uninstall": "0.0.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   }
 }
