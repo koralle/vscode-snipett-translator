@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const BellOnBundlerErrorPlugin = require("bell-on-bundler-error-plugin");
 
 module.exports = {
   entry: "./src/ts/index.tsx",
@@ -56,6 +57,8 @@ module.exports = {
       template: path.resolve(__dirname, "src/html/index.html"),
       inject: true,
     }),
+
+    new BellOnBundlerErrorPlugin(),
   ],
 
   devServer: {
