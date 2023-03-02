@@ -1,12 +1,9 @@
-import * as React from "react";
-import { Header } from "./components/Header";
-import SnipettContainer from "./containers/snipettContainer";
+import React from "react";
 
-export const App: React.FC = () => {
-  return (
-    <React.Fragment>
-      <Header title="vscode-snipett-translator" />
-      <SnipettContainer />
-    </React.Fragment>
-  );
+interface AppProps {
+  title: string;
+}
+
+export const App = () => {
+  return <h1>Hello, world!</h1>;
 };

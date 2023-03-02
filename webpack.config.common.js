@@ -1,54 +1,78 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BabelMinifyPlugin = require('babel-minify-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const BellOnBundlerErrorPlugin = require("bell-on-bundler-error-plugin");
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-
-  entry: path.resolve(__dirname, 'src/ts/index.tsx'),
+  entry: "./src/ts/index.tsx",
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "./dist/js"),
   },
 
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
-        use: 'ts-loader',
-        exclude: /(node_modules | test)/
+        test: /.(js|jsx)$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
+      {
+        test: /.(ts|tsx)$/,
+        use: {
+          loader: "ts-loader",
+        },
+      },
+      {
+        test: /\.html$/,
+        loader: "html-loader",
       },
       {
         test: /\.(css|sass|scss)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|oft)$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
           limit: 8192,
-          name: path.resolve(__dirname, "images/[name].[ext]")
-        }
+          name: path.resolve(__dirname, "images/[name].[ext]"),
+        },
       },
-    ]
+    ],
   },
 
   resolve: {
-    extensions: ['.tsx', 'jsx', '.ts', '.js', '.json'],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      //filename: "index.html",
-      template: path.resolve(__dirname, "src/html/index.html")
+      filename: path.resolve(__dirname, "dist/index.html"),
+      template: path.resolve(__dirname, "src/html/index.html"),
+      inject: true,
     }),
-    new HardSourceWebpackPlugin()
+
+    new BellOnBundlerErrorPlugin(),
+    new HardSourceWebpackPlugin(),
   ],
+
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
-    compress: true,
-    port: 9000,
-  }
-}
+    publicPath: "/js/",
+    host: "0.0.0.0",
+    useLocalIp: true,
+    open: true,
+  },
+
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
+};
